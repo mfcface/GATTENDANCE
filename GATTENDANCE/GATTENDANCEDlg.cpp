@@ -8,6 +8,9 @@
 #include "GATTENDANCEDlg.h"
 #include "afxdialogex.h"
 
+#include "WinLogin.h"
+#include "WinRegister.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -51,7 +54,7 @@ END_MESSAGE_MAP()
 
 
 CGATTENDANCEDlg::CGATTENDANCEDlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_GATTENDANCE_DIALOG, pParent)
+	: CDialogEx(IDD_DIALOG_Hello, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -65,6 +68,8 @@ BEGIN_MESSAGE_MAP(CGATTENDANCEDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BT_Login, &CGATTENDANCEDlg::OnBnClickedBtLogin)
+	ON_BN_CLICKED(IDC_BT_Register, &CGATTENDANCEDlg::OnBnClickedBtRegister)
 END_MESSAGE_MAP()
 
 
@@ -153,3 +158,20 @@ HCURSOR CGATTENDANCEDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void CGATTENDANCEDlg::OnBnClickedBtLogin()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	WinLogin win_log;
+	win_log.DoModal();
+	
+}
+
+
+void CGATTENDANCEDlg::OnBnClickedBtRegister()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	WinRegister win_re;
+	win_re.DoModal();
+}

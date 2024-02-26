@@ -14,7 +14,8 @@ public:
 
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_GATTENDANCE_DIALOG };
+	enum { IDD = IDD_DIALOG_Hello
+	};
 #endif
 
 	protected:
@@ -31,4 +32,7 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedBtLogin();
+	afx_msg void OnBnClickedBtRegister();
 };
