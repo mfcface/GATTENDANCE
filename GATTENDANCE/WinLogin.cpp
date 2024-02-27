@@ -5,6 +5,7 @@
 #include "GATTENDANCE.h"
 #include "WinLogin.h"
 #include "afxdialogex.h"
+#include "C_Show.h"
 
 
 // WinLogin 对话框
@@ -38,4 +39,7 @@ END_MESSAGE_MAP()
 void WinLogin::OnBnClickedBtLface()
 {
 	// TODO: 在此添加控件通知处理程序代码
+	CDialogEx::OnCancel();
+	C_Show show;
+	show.DoModal();
 }
