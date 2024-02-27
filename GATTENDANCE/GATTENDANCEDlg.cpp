@@ -34,9 +34,6 @@ public:
 // 实现
 protected:
 	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg void OnTimer(UINT_PTR nIDEvent);
-	afx_msg void OnPaint();
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
@@ -49,8 +46,6 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-	ON_WM_TIMER()
-	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 
@@ -75,7 +70,6 @@ BEGIN_MESSAGE_MAP(CGATTENDANCEDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BT_Login, &CGATTENDANCEDlg::OnBnClickedBtLogin)
 	ON_BN_CLICKED(IDC_BT_Register, &CGATTENDANCEDlg::OnBnClickedBtRegister)
-	ON_BN_CLICKED(IDC_BT_Close, &CGATTENDANCEDlg::OnBnClickedBtClose)
 END_MESSAGE_MAP()
 
 
@@ -180,27 +174,4 @@ void CGATTENDANCEDlg::OnBnClickedBtRegister()
 	// TODO: 在此添加控件通知处理程序代码
 	WinRegister win_re;
 	win_re.DoModal();
-}
-
-
-void CGATTENDANCEDlg::OnBnClickedBtClose()
-{
-	// TODO: 在此添加控件通知处理程序代码
-	CDialogEx::OnCancel();
-}
-
-
-void CAboutDlg::OnTimer(UINT_PTR nIDEvent)
-{
-	// TODO: 在此添加消息处理程序代码和/或调用默认值
-
-	CDialogEx::OnTimer(nIDEvent);
-}
-
-
-void CAboutDlg::OnPaint()
-{
-	CPaintDC dc(this); // device context for painting
-					   // TODO: 在此处添加消息处理程序代码
-					   // 不为绘图消息调用 CDialogEx::OnPaint()
 }

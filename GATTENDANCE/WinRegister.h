@@ -20,14 +20,4 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
 
 	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg void OnBnClickedBtLClose();
-	afx_msg void OnBnClickedBtRFace();
-	CStatic m_camera;
-	CString strText;
-	BOOL m_get_face;
-	BOOL m_open_camera;
-	virtual BOOL OnInitDialog();
-	afx_msg void OnPaint();
-	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };

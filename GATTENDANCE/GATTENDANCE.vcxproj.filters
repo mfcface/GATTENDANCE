@@ -39,9 +39,6 @@
     <ClInclude Include="WinRegister.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="FaceTool.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GATTENDANCE.cpp">
@@ -57,9 +54,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="WinRegister.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="FaceTool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
