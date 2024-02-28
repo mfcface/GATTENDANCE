@@ -80,7 +80,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>Opencv\build\include;ArcFace\inc;Opencv\build\include\opencv2;$(IncludePath)</IncludePath>
-    <LibraryPath>ArcFace\lib\X64;Opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>ArcFace\lib;ArcFace\lib\X64;Opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -190,6 +190,7 @@
     <ClInclude Include="C_Attendance.h" />
     <ClInclude Include="C_Information.h" />
     <ClInclude Include="C_Show.h" />
+    <ClInclude Include="FaceTool.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GATTENDANCE.h" />
     <ClInclude Include="GATTENDANCEDlg.h" />
