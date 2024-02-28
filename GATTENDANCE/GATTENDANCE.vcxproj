@@ -205,6 +205,7 @@
     <ClCompile Include="C_Attendance.cpp" />
     <ClCompile Include="C_Information.cpp" />
     <ClCompile Include="C_Show.cpp" />
+    <ClCompile Include="FaceTool.cpp" />
     <ClCompile Include="GATTENDANCE.cpp" />
     <ClCompile Include="GATTENDANCEDlg.cpp" />
     <ClCompile Include="pch.cpp">

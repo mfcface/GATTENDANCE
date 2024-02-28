@@ -83,6 +83,9 @@
     <ClCompile Include="C_Show.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="FaceTool.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GATTENDANCE.rc">
