@@ -14,6 +14,9 @@
 #include "FaceTool.h"
 
 //数据库
+#include "SQL.h"
+#include "SQL/sqlite3.h"
+
 
 //
 
