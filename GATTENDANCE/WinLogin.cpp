@@ -129,11 +129,15 @@ void WinLogin::OnTimer(UINT_PTR nIDEvent)
 
 			//人脸对比
 			float num = faceCompare(FaceModel, img_tmp, img);
-			if (num > 0.95)
+			if (num > 0.97)
 			{
-
+				
 				KillTimer(1);                       // 关闭定时器
 				cap_WinReg.release();               // 关闭摄像头
+				if (strText == "管理员")
+				{
+					MessageBox(_T("管理员登录"));
+				}
 				CDialogEx::OnCancel();
 				C_Show show;
 				show.DoModal();

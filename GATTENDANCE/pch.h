@@ -9,6 +9,12 @@
 
 // 添加要在此处预编译的标头
 #include "framework.h"
+
+//工具
 #include "FaceTool.h"
+
+//数据库
+
+//
 
 #endif //PCH_H
