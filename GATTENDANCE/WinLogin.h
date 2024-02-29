@@ -22,4 +22,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedBtLface();
+	virtual BOOL OnInitDialog();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	CStatic m_camera;
+	CString strText;
+	BOOL m_open_camera;
 };
