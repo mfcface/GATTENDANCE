@@ -28,4 +28,5 @@ public:
 	BOOL m_get_face;
 	BOOL m_open_camera;
 	CStatic m_camera;
+	SQL db;
 };

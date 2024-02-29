@@ -20,4 +20,8 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
 
 	DECLARE_MESSAGE_MAP()
+public:
+	SQL db;
+	afx_msg void OnBnClickedEdit3();
+	virtual BOOL OnInitDialog();
 };

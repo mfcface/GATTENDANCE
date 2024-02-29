@@ -17,6 +17,9 @@
 #include "SQL.h"
 #include "SQL/sqlite3.h"
 
+#include <Windows.h> // 控制台正确显示中文
+#pragma execution_character_set("utf-8") //程序正确显示中文
+#include "utf_8.h"
 
 //
 

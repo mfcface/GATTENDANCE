@@ -8,8 +8,25 @@
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui_c.h> // 用到了cvGetWindowHandle
+
+
 using namespace cv;
 static cv::VideoCapture cap_WinReg; // 定义注册窗口的摄像头(static只能本文件使用)
+
+#include <Windows.h>
+#include <string>
+
+std::string ConvertUnicodeToUTF8(const CString& unicodeStr)
+{
+	int unicodeLength = unicodeStr.GetLength();
+	int utf8Length = WideCharToMultiByte(CP_UTF8, 0, unicodeStr, unicodeLength, nullptr, 0, nullptr, nullptr);
+	char* utf8Buffer = new char[utf8Length + 1];
+	WideCharToMultiByte(CP_UTF8, 0, unicodeStr, unicodeLength, utf8Buffer, utf8Length, nullptr, nullptr);
+	std::string utf8Str(utf8Buffer, utf8Length);
+	delete[] utf8Buffer;
+	return utf8Str;
+}
+
 CascadeClassifier Classifier;//定义分类器
 // WinRegister 对话框
 
@@ -47,11 +64,13 @@ void WinRegister::OnBnClickedBtRface()
 	// 假设 pEdit 是您的 CEdit 对象指针
 
 	GetDlgItemText(IDC_EDIT1, strText);
+
 	if (strText.GetLength() == 0)
 	{
 		MessageBox(_T("请输入用户名!!!用户名不能为空！！"));
 		return;
 	}
+	
 	if (!m_open_camera)
 	{
 		// 将opencv的窗体嵌入到图片控件m_imgCamera_single中
@@ -84,7 +103,8 @@ void WinRegister::OnBnClickedBtRface()
 BOOL WinRegister::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
-
+	SetConsoleOutputCP(CP_UTF8);//控制台正确显示中文
+	db.setDB("SQL/database/Info.db");
 	// TODO:  在此添加额外的初始化
 	if (!Classifier.load("xml/haarcascade_frontalface_alt.xml"))   //加载训练文件  
 	{
@@ -122,8 +142,11 @@ void WinRegister::OnTimer(UINT_PTR nIDEvent)
 		{
 			// 假设 strText 是从编辑框中获取的文本值
 			std::string filename = "face_data/" + std::string(CT2A(strText)) + ".jpg"; // 构建新的文件名
+			
 
+			std::string data = "'NULL','" + ConvertUnicodeToUTF8(strText) +"','NULL','NULL'"; // 构建新的data名
 			cv::imwrite(filename, cam_frame); // 保存单帧照片，文件名为编辑框中的文本值
+			db.insertData("Info", data.c_str());
 			shoot_count = 0;                    // 清零计数
 			KillTimer(1);                       // 关闭定时器
 			cap_WinReg.release();               // 关闭摄像头

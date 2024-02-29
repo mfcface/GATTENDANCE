@@ -165,6 +165,7 @@ void CGATTENDANCEDlg::OnBnClickedBtLogin()
 	// TODO: 在此添加控件通知处理程序代码
 	WinLogin win_log;
 	win_log.DoModal();
+	CDialogEx::OnCancel();
 	
 }
 

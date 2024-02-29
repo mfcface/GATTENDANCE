@@ -28,7 +28,27 @@ void C_Information::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(C_Information, CDialogEx)
+	ON_BN_CLICKED(IDC_EDIT3, &C_Information::OnBnClickedEdit3)
 END_MESSAGE_MAP()
 
 
 // C_Information 消息处理程序
+
+
+void C_Information::OnBnClickedEdit3()
+{
+	// TODO: 在此添加控件通知处理程序代码
+
+}
+
+
+BOOL C_Information::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+
+	// TODO:  在此添加额外的初始化
+	db.setDB("SQL/database/userInfo.db");
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+				  // 异常: OCX 属性页应返回 FALSE
+}

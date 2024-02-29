@@ -86,6 +86,7 @@ BOOL WinLogin::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
+	db.setDB("SQL/database/Info.db");
 	faceInit(&FaceModel);
 	m_open_camera = false;
 	// TODO:  在此添加额外的初始化

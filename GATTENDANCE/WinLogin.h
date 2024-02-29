@@ -27,4 +27,5 @@ public:
 	CStatic m_camera;
 	CString strText;
 	BOOL m_open_camera;
+	SQL db;
 };

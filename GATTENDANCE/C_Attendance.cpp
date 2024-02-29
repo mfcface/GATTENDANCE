@@ -45,7 +45,7 @@ void C_Attendance::OnBnClickedButtonOn()
 {
     // TODO: 在此添加控件通知处理程序代码
     COleDateTime currentTime = COleDateTime::GetCurrentTime();
-    CString strTime = currentTime.Format("%Y-%m-%d %H:%M:%S");
+    CString strTime = currentTime.Format(L"%Y-%m-%d %H:%M:%S");
 
     if (m_pDynamicText1 == nullptr)
     {
@@ -75,7 +75,7 @@ void C_Attendance::OnBnClickedButtonOff()
 
         // 获取当前时间
         COleDateTime currentTime = COleDateTime::GetCurrentTime();
-        CString currentTime2 = currentTime.Format("%Y-%m-%d %H:%M:%S");
+        CString currentTime2 = currentTime.Format(L"%Y-%m-%d %H:%M:%S");
         if (m_pDynamicText2 == nullptr)
         {
             // 创建一个新的静态文本控件
@@ -90,7 +90,7 @@ void C_Attendance::OnBnClickedButtonOff()
         }
         // 计算时长
         COleDateTimeSpan duration = currentTime - prevTime;
-        CString strDuration = duration.Format("%H:%M:%S");
+        CString strDuration = duration.Format(L"%H:%M:%S");
 
         if (m_pDynamicText3 == nullptr)
         {
