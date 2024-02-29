@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include "sqlite/sqlite3.h"
 
 // C_Information 对话框
 
