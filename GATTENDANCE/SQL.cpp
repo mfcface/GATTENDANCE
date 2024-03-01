@@ -2,6 +2,7 @@
 #include "SQL.h"
 #include "sqlite3.h"
 
+
 BOOL SQL::executeQuery(const char* query)
 {
     char* errMsg = nullptr;
@@ -13,6 +14,18 @@ BOOL SQL::executeQuery(const char* query)
         return false;
     }
     return true;
+}
+
+std::string SQL::ConvertUnicodeToUTF8(const CString& unicodeStr)
+{
+
+    int unicodeLength = unicodeStr.GetLength();
+    int utf8Length = WideCharToMultiByte(CP_UTF8, 0, unicodeStr, unicodeLength, nullptr, 0, nullptr, nullptr);
+    char* utf8Buffer = new char[utf8Length + 1];
+    WideCharToMultiByte(CP_UTF8, 0, unicodeStr, unicodeLength, utf8Buffer, utf8Length, nullptr, nullptr);
+    std::string utf8Str(utf8Buffer, utf8Length);
+    delete[] utf8Buffer;
+    return utf8Str;
 }
 
 SQL::SQL() : db(nullptr) {}
@@ -50,12 +63,6 @@ void SQL::dropTable(const char* tableName)
     executeQuery(query);
 }
 
-bool SQL::havethis(const char* table, const char* columns, const char* condition)
-{
-    char query[100];
-    snprintf(query, sizeof(query), "SELECT %s FROM %s WHERE %s", columns, table, condition);
-    return executeQuery(query);
-}
 
 void SQL::insertData(const char* table, const char* data)
 {
@@ -78,32 +85,45 @@ void SQL::updateData(const char* table, const char* setValues, const char* condi
     executeQuery(query);
 }
 
-std::vector<std::string> SQL::selectData(const char* table, const char* columns, const char* condition)
+std::vector<SQL::info> SQL::selectData(const char* table, const char* columns, const char* condition)
 {
-    std::vector<std::string> result;
+    std::vector<SQL::info> result;
+
+    char* errMsg = nullptr;
     char query[100];
     snprintf(query, sizeof(query), "SELECT %s FROM %s WHERE %s", columns, table, condition);
 
-    sqlite3_stmt* stmt;
-    int rc = sqlite3_prepare_v2(db, query, -1, &stmt, nullptr);
+    
+    int rc = sqlite3_exec(db, query, [](void* data, int argc, char** argv, char** azColName) 
+        {
+            std::vector<info>* result = static_cast<std::vector<info>*>(data);
+
+
+            info rowInfo;
+            for (int i = 0; i < argc; ++i)
+            {
+                if (std::string(azColName[i]) == "ID") {
+                    rowInfo.ID = argv[i] ? std::string(argv[i]) : "NULL";
+                }
+                else if (std::string(azColName[i]) == "name") {
+                    rowInfo.name = argv[i] ? std::string(argv[i]) : "NULL";
+                }
+                else if (std::string(azColName[i]) == "gender") {
+                    rowInfo.gender = argv[i] ? std::string(argv[i]) : "NULL";
+                }
+                else if (std::string(azColName[i]) == "major") {
+                    rowInfo.major = argv[i] ? std::string(argv[i]) : "NULL";
+                }
+            }
+
+            result->push_back(rowInfo);
+
+            return 0;
+        }, &result, &errMsg);
+
     if (rc != SQLITE_OK) {
-        std::cerr << "Error preparing statement: " << sqlite3_errmsg(db) << std::endl;
-        return result;
+        std::cerr << "SQL´íÎó: " << errMsg << std::endl;
+        sqlite3_free(errMsg);
     }
-
-    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
-        int numColumns = sqlite3_column_count(stmt);
-        for (int i = 0; i < numColumns; ++i) {
-            const char* value = reinterpret_cast<const char*>(sqlite3_column_text(stmt, i));
-            result.push_back(value);
-        }
-    }
-
-    if (rc != SQLITE_DONE) {
-        std::cerr << "Error executing statement: " << sqlite3_errmsg(db) << std::endl;
-    }
-
-    sqlite3_finalize(stmt);
-
     return result;
 }

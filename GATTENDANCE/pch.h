@@ -19,8 +19,13 @@
 
 #include <Windows.h> // 控制台正确显示中文
 #pragma execution_character_set("utf-8") //程序正确显示中文
-#include "utf_8.h"
 
-//
+
+//窗口
+#include "C_Show.h"
+#include "C_Attendance.h"
+#include "C_Information.h"
+#include "WinLogin.h"
+#include "WinRegister.h"
 
 #endif //PCH_H

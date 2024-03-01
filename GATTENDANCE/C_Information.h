@@ -22,6 +22,15 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	SQL db;
-	afx_msg void OnBnClickedEdit3();
+	SQL::info user;
+	void getInfo(SQL::info& Info);
+	CString getCString(CEdit* staticCtrl);
 	virtual BOOL OnInitDialog();
+	CEdit m_name;
+	CEdit m_gender;
+	CEdit m_ID;
+	CEdit m_major;
+	
+	afx_msg void OnBnClickedBtUpdata();
+	afx_msg void OnBnClickedButton2();
 };

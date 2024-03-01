@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-
 // WinLogin 对话框
 
 class WinLogin : public CDialogEx
@@ -28,4 +27,7 @@ public:
 	CString strText;
 	BOOL m_open_camera;
 	SQL db;
+	SQL::info user; // 定义静态成员变量
+	afx_msg void OnBnClickedButton1();
 };
+

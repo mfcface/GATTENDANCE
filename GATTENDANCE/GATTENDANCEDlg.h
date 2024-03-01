@@ -35,4 +35,5 @@ protected:
 public:
 	afx_msg void OnBnClickedBtLogin();
 	afx_msg void OnBnClickedBtRegister();
+	afx_msg void OnBnClickedButton1();
 };

@@ -6,6 +6,7 @@
 #include "WinLogin.h"
 #include "afxdialogex.h"
 #include "C_Show.h"
+#include "GATTENDANCEDlg.h"
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui_c.h> // 用到了cvGetWindowHandle
@@ -41,6 +42,7 @@ void WinLogin::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(WinLogin, CDialogEx)
 	ON_BN_CLICKED(IDC_BT_L_face, &WinLogin::OnBnClickedBtLface)
 	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_BUTTON1, &WinLogin::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -57,6 +59,14 @@ void WinLogin::OnBnClickedBtLface()
 		MessageBox(_T("请输入用户名!!!用户名不能为空！！"));
 		return;
 	}
+	std::string da = "name = '" + SQL::ConvertUnicodeToUTF8(strText) + "'";
+	std::vector<SQL::info> result = db.selectData("Info", "*", da.c_str());
+	if (result.empty())
+	{
+		MessageBox(_T("用户不存在"));
+		return;
+	}
+	user = result[0];
 	if (!m_open_camera)
 	{
 		// 将opencv的窗体嵌入到图片控件m_imgCamera_single中
@@ -130,7 +140,7 @@ void WinLogin::OnTimer(UINT_PTR nIDEvent)
 
 			//人脸对比
 			float num = faceCompare(FaceModel, img_tmp, img);
-			if (num > 0.97)
+			if (num > 0.95)
 			{
 				
 				KillTimer(1);                       // 关闭定时器
@@ -141,6 +151,7 @@ void WinLogin::OnTimer(UINT_PTR nIDEvent)
 				}
 				CDialogEx::OnCancel();
 				C_Show show;
+				show.getInfo(user);
 				show.DoModal();
 			}
 
@@ -149,4 +160,12 @@ void WinLogin::OnTimer(UINT_PTR nIDEvent)
 
 	}
 	CDialogEx::OnTimer(nIDEvent);
+}
+
+void WinLogin::OnBnClickedButton1()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CGATTENDANCEDlg m_hello;
+	m_hello.DoModal();
+	OnCancel();
 }

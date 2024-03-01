@@ -190,7 +190,6 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="C_Absence.h" />
     <ClInclude Include="C_Attendance.h" />
     <ClInclude Include="C_Information.h" />
     <ClInclude Include="C_Show.h" />
@@ -207,7 +206,6 @@
     <ClInclude Include="WinRegister.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C_Absence.cpp" />
     <ClCompile Include="C_Attendance.cpp" />
     <ClCompile Include="C_Information.cpp" />
     <ClCompile Include="C_Show.cpp" />

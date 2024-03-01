@@ -21,8 +21,16 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedButton2();
+	SQL::info user;
+	void getInfo(SQL::info& Info);
+	CStatic m_id;
+	CStatic m_name;
+	CStatic m_gender;
+	CStatic m_major;
 	afx_msg void OnBnClickedButtonAttendance();
 	afx_msg void OnBnClickedButtonAbsence();
 	afx_msg void OnBnClickedButtonInformation();
+	afx_msg void OnBnClickedButton1();
+	virtual BOOL OnInitDialog();
+	void UpdateStaticText(CStatic& st,const CString& newText);
 };

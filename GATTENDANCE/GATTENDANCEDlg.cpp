@@ -70,6 +70,7 @@ BEGIN_MESSAGE_MAP(CGATTENDANCEDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BT_Login, &CGATTENDANCEDlg::OnBnClickedBtLogin)
 	ON_BN_CLICKED(IDC_BT_Register, &CGATTENDANCEDlg::OnBnClickedBtRegister)
+	ON_BN_CLICKED(IDC_BUTTON1, &CGATTENDANCEDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -164,8 +165,10 @@ void CGATTENDANCEDlg::OnBnClickedBtLogin()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	WinLogin win_log;
+	CDialogEx::OnCancel();
 	win_log.DoModal();
 	CDialogEx::OnCancel();
+	
 	
 }
 
@@ -175,4 +178,11 @@ void CGATTENDANCEDlg::OnBnClickedBtRegister()
 	// TODO: 在此添加控件通知处理程序代码
 	WinRegister win_re;
 	win_re.DoModal();
+}
+
+
+void CGATTENDANCEDlg::OnBnClickedButton1()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	OnCancel();
 }

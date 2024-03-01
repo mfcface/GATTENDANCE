@@ -13,7 +13,6 @@
 #define IDD_DIALOG_SHOW                 130
 #define IDD_DIALOG_INFORMATION          132
 #define IDD_DIALOG_ATTENDANCE           133
-#define IDD_DIALOG_ABSENCE              134
 #define IDC_BT_Login                    1001
 #define IDC_BT_Register                 1002
 #define IDC_BT_L_face                   1003
@@ -24,10 +23,17 @@
 #define IDC_EDIT3                       1009
 #define IDC_BUTTON1                     1009
 #define IDC_BUTTON_OFF                  1009
+#define IDC_BT_Updata                   1009
 #define IDC_EDIT4                       1010
 #define IDC_BUTTON_ON                   1010
 #define IDC_EDIT1                       1010
 #define IDC_EDIT5                       1011
+#define IDC_ST_ID                       1014
+#define IDC_ST_NAME                     1015
+#define IDC_ST_GENDER                   1016
+#define IDC_ST_MAJOR                    1017
+#define IDC_BUTTON2                     1018
+#define IDC_BT_Close                    1019
 #define IDC_CAMERA_LOG                  2011
 #define IDC_BT_R_face                   2012
 #define IDC_CAMERA_REG                  2013
@@ -38,7 +44,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        138
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1014
+#define _APS_NEXT_CONTROL_VALUE         1020
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -29,4 +29,5 @@ public:
 	BOOL m_open_camera;
 	CStatic m_camera;
 	SQL db;
+	afx_msg void OnBnClickedButton1();
 };

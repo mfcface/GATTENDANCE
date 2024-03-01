@@ -13,19 +13,6 @@
 using namespace cv;
 static cv::VideoCapture cap_WinReg; // 定义注册窗口的摄像头(static只能本文件使用)
 
-#include <Windows.h>
-#include <string>
-
-std::string ConvertUnicodeToUTF8(const CString& unicodeStr)
-{
-	int unicodeLength = unicodeStr.GetLength();
-	int utf8Length = WideCharToMultiByte(CP_UTF8, 0, unicodeStr, unicodeLength, nullptr, 0, nullptr, nullptr);
-	char* utf8Buffer = new char[utf8Length + 1];
-	WideCharToMultiByte(CP_UTF8, 0, unicodeStr, unicodeLength, utf8Buffer, utf8Length, nullptr, nullptr);
-	std::string utf8Str(utf8Buffer, utf8Length);
-	delete[] utf8Buffer;
-	return utf8Str;
-}
 
 CascadeClassifier Classifier;//定义分类器
 // WinRegister 对话框
@@ -52,6 +39,7 @@ void WinRegister::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(WinRegister, CDialogEx)
 	ON_BN_CLICKED(IDC_BT_R_face, &WinRegister::OnBnClickedBtRface)
 	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_BUTTON1, &WinRegister::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -68,6 +56,12 @@ void WinRegister::OnBnClickedBtRface()
 	if (strText.GetLength() == 0)
 	{
 		MessageBox(_T("请输入用户名!!!用户名不能为空！！"));
+		return;
+	}
+	std::string da = "name = '" + SQL::ConvertUnicodeToUTF8(strText)+"'";
+	if (!db.selectData("Info","*",da.c_str()).empty())
+	{
+		MessageBox(_T("have this user"));
 		return;
 	}
 	
@@ -103,7 +97,7 @@ void WinRegister::OnBnClickedBtRface()
 BOOL WinRegister::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
-	SetConsoleOutputCP(CP_UTF8);//控制台正确显示中文
+	
 	db.setDB("SQL/database/Info.db");
 	// TODO:  在此添加额外的初始化
 	if (!Classifier.load("xml/haarcascade_frontalface_alt.xml"))   //加载训练文件  
@@ -143,8 +137,7 @@ void WinRegister::OnTimer(UINT_PTR nIDEvent)
 			// 假设 strText 是从编辑框中获取的文本值
 			std::string filename = "face_data/" + std::string(CT2A(strText)) + ".jpg"; // 构建新的文件名
 			
-
-			std::string data = "'NULL','" + ConvertUnicodeToUTF8(strText) +"','NULL','NULL'"; // 构建新的data名
+			std::string data = "'NULL','" + SQL::ConvertUnicodeToUTF8(strText) +"','NULL','NULL'"; // 构建新的data名
 			cv::imwrite(filename, cam_frame); // 保存单帧照片，文件名为编辑框中的文本值
 			db.insertData("Info", data.c_str());
 			shoot_count = 0;                    // 清零计数
@@ -158,4 +151,12 @@ void WinRegister::OnTimer(UINT_PTR nIDEvent)
 	}
 
 	CDialogEx::OnTimer(nIDEvent);
+}
+
+
+void WinRegister::OnBnClickedButton1()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	OnCancel();
+
 }
